@@ -1,7 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8885307b-4f63-4400-9aee-f2fd0245e7cc" name="Default" comment="" />
+    <list default="true" id="8885307b-4f63-4400-9aee-f2fd0245e7cc" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/GifSequenceWriter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/ImageFrame.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ImgToTxt/FeynmanNewImage.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ImgToTxt/Gandalf1NewImage.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ImgToTxt/Gandalf1ascii.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ImgToTxt/Gandalf2NewImage.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ImgToTxt/Gandalf2ascii.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ImgToTxt/Gandalf3NewImage.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ImgToTxt/Gandalf3ascii.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ImgToTxt/feynmanascii.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ImgToTxt/ghost.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ImgToTxt/kanyeNewImage.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ImgToTxt/kanyeascii.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ImgToTxt/mlNewImage.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ImgToTxt/mlascii.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ImgToTxt/newtext.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/ImgToTxt/saganascii.txt" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ImgToTxt/Driver.class" afterPath="$PROJECT_DIR$/out/production/ImgToTxt/Driver.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/ImgToTxt/ImageToText.class" afterPath="$PROJECT_DIR$/out/production/ImgToTxt/ImageToText.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Driver.java" afterPath="$PROJECT_DIR$/src/Driver.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/ImageToText.java" afterPath="$PROJECT_DIR$/src/ImageToText.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/TextToGraphicConverter.java" afterPath="$PROJECT_DIR$/src/TextToGraphicConverter.java" />
+    </list>
     <ignored path="ImgToTxt.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -23,11 +47,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="TextToGraphicConverter.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TextToGraphicConverter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/TextToGraphicConverter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.63282573">
-              <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="76" column="108" selection-start-line="76" selection-start-column="108" selection-end-line="76" selection-end-column="108" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -35,13 +59,49 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ImageToText.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ImageToText.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ImageToText.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="53" column="53" selection-start-line="53" selection-start-column="53" selection-end-line="53" selection-end-column="53" />
+            <state vertical-scroll-proportion="0.74111676">
+              <caret line="414" column="46" selection-start-line="414" selection-start-column="46" selection-end-line="414" selection-end-column="46" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#8220#8232#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GifSequenceWriter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/GifSequenceWriter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="177" column="48" selection-start-line="177" selection-start-column="48" selection-end-line="177" selection-end-column="48" />
+              <folding>
+                <element signature="e#0#6718#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ImageFrame.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ImageFrame.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="25" column="29" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+                <element signature="e#878#879#0" expanded="true" />
+                <element signature="e#906#907#0" expanded="true" />
+                <element signature="e#935#936#0" expanded="true" />
+                <element signature="e#963#964#0" expanded="true" />
+                <element signature="e#998#999#0" expanded="true" />
+                <element signature="e#1029#1030#0" expanded="true" />
+                <element signature="e#1058#1059#0" expanded="true" />
+                <element signature="e#1086#1087#0" expanded="true" />
+                <element signature="e#1116#1117#0" expanded="true" />
+                <element signature="e#1145#1146#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -51,7 +111,7 @@
         <entry file="file://$PROJECT_DIR$/src/Driver.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="5" column="33" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="33" />
+              <caret line="14" column="57" selection-start-line="14" selection-start-column="57" selection-end-line="14" selection-end-column="57" />
               <folding />
             </state>
           </provider>
@@ -66,6 +126,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="GradleLocalSettings">
     <option name="externalProjectsViewState">
       <projects_view />
@@ -75,9 +138,11 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/FastRGB.java" />
+        <option value="$PROJECT_DIR$/src/ImageFrame.java" />
+        <option value="$PROJECT_DIR$/src/GifSequenceWriter.java" />
         <option value="$PROJECT_DIR$/src/TextToGraphicConverter.java" />
-        <option value="$PROJECT_DIR$/src/ImageToText.java" />
         <option value="$PROJECT_DIR$/src/Driver.java" />
+        <option value="$PROJECT_DIR$/src/ImageToText.java" />
       </list>
     </option>
   </component>
@@ -117,6 +182,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -153,7 +219,6 @@
       </pane>
       <pane id="Scope" />
       <pane id="PackagesPane" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -632,15 +697,16 @@
       <workItem from="1463495377903" duration="5751000" />
       <workItem from="1463529753463" duration="500000" />
       <workItem from="1463530637582" duration="4405000" />
+      <workItem from="1463588051160" duration="28355000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28030000" />
+    <option name="totallyTimeSpent" value="56385000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -649,10 +715,10 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21801706" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.036780383" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -690,6 +756,35 @@
     <entry file="file://$PROJECT_DIR$/src/TextToGraphicConverter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ImageToText.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="53" column="53" selection-start-line="53" selection-start-column="53" selection-end-line="53" selection-end-column="53" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#8220#8232#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Driver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="33" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TextToGraphicConverter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
           <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -703,6 +798,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#8220#8232#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -731,6 +827,7 @@
           <caret line="79" column="43" selection-start-line="79" selection-start-column="43" selection-end-line="79" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#8220#8232#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -741,6 +838,7 @@
           <caret line="109" column="32" selection-start-line="109" selection-start-column="32" selection-end-line="109" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#8220#8232#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -761,13 +859,9 @@
           <caret line="68" column="72" selection-start-line="68" selection-start-column="72" selection-end-line="68" selection-end-column="72" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#8220#8232#0" expanded="true" />
           </folding>
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mlNewImage.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
       </provider>
     </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_65/src.zip!/java/awt/image/BufferedImage.java">
@@ -775,7 +869,7 @@
         <state vertical-scroll-proportion="0.24703892">
           <caret line="916" column="0" selection-start-line="916" selection-start-column="0" selection-end-line="916" selection-end-column="0" />
           <folding>
-            <element signature="e#37786#37787#0" expanded="true" />
+            <element signature="e#37786#37787#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -784,34 +878,65 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.71099293">
           <caret line="90" column="0" selection-start-line="90" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Driver.java">
+    <entry file="file://$PROJECT_DIR$/src/TextToGraphicConverter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="33" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ImageToText.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="53" column="53" selection-start-line="53" selection-start-column="53" selection-end-line="53" selection-end-column="53" />
+          <caret line="76" column="108" selection-start-line="76" selection-start-column="108" selection-end-line="76" selection-end-column="108" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/TextToGraphicConverter.java">
+    <entry file="file://$PROJECT_DIR$/src/Driver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.63282573">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="57" selection-start-line="14" selection-start-column="57" selection-end-line="14" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ImageFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="25" column="29" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#878#879#0" expanded="true" />
+            <element signature="e#906#907#0" expanded="true" />
+            <element signature="e#935#936#0" expanded="true" />
+            <element signature="e#963#964#0" expanded="true" />
+            <element signature="e#998#999#0" expanded="true" />
+            <element signature="e#1029#1030#0" expanded="true" />
+            <element signature="e#1058#1059#0" expanded="true" />
+            <element signature="e#1086#1087#0" expanded="true" />
+            <element signature="e#1116#1117#0" expanded="true" />
+            <element signature="e#1145#1146#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GifSequenceWriter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="177" column="48" selection-start-line="177" selection-start-column="48" selection-end-line="177" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#6718#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ImageToText.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.74111676">
+          <caret line="414" column="46" selection-start-line="414" selection-start-column="46" selection-end-line="414" selection-end-column="46" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#8220#8232#0" expanded="true" />
           </folding>
         </state>
       </provider>
