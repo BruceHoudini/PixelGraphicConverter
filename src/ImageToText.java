@@ -32,7 +32,7 @@ public class ImageToText {
 
     }
 
-    public void gifMake(Color background) {
+    public void gifMake(Color background, int reduceBy) {
 
 
         GifSequenceWriter writ;
@@ -69,7 +69,7 @@ public class ImageToText {
 
                     //img = imgpass;
 
-                    img = scale(imgpass, width / 2, height / 2);
+                    img = scale(imgpass, width / reduceBy, height / reduceBy);
 
                     width = img.getWidth();
                     height = img.getHeight();
@@ -378,7 +378,7 @@ public class ImageToText {
             }
         }
     }
-    public void colorText(Color background){
+    public void colorText(Color background, int reduceBy){
         GifSequenceWriter writ;
         BufferedImage img;
         BufferedImage imgpass;
@@ -415,7 +415,7 @@ public class ImageToText {
 
                 //img = imgpass;
 
-                img = scale(imgpass, width / 8, height / 8);
+                img = scale(imgpass, width / reduceBy, height / reduceBy);
 
                 width = img.getWidth();
                 height = img.getHeight();
