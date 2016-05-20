@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class TextToGraphicConverter {
 
-    public BufferedImage convertTextToGraphic(Font font, BufferedReader br, int lines, int originalwidth) throws IOException {
+    public BufferedImage convertTextToGraphic(Font font, BufferedReader br, int lines, Color background) throws IOException {
         String text = br.readLine();
 
         BufferedImage img = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
@@ -39,7 +39,7 @@ public class TextToGraphicConverter {
         g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
         g2d.setFont(font);
         fm = g2d.getFontMetrics();
-        g2d.setColor(Color.WHITE);
+        g2d.setColor(background);
         g2d.drawRect(0, 0, width, height*(lines-1));
         g2d.fillRect(0, 0, width, height*(lines-1));
         g2d.setColor(Color.BLACK);
@@ -54,7 +54,7 @@ public class TextToGraphicConverter {
         return img;
     }
 
-    public BufferedImage convertColorTextToGraphic(Font font, BufferedReader br, int lines, int originalwidth, ArrayList<Color> colorlist) throws IOException{
+    public BufferedImage convertColorTextToGraphic(Font font, BufferedReader br, int lines, Color background, ArrayList<Color> colorlist) throws IOException{
         String text = br.readLine();
 
         BufferedImage img = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
@@ -79,7 +79,7 @@ public class TextToGraphicConverter {
         g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
         g2d.setFont(font);
         fm = g2d.getFontMetrics();
-        g2d.setColor(Color.BLACK);
+        g2d.setColor(background);
         g2d.drawRect(0, 0, width, height*(lines-1));
         g2d.fillRect(0, 0, width, height*(lines-1));
         int charwidth = fm.getMaxAdvance();

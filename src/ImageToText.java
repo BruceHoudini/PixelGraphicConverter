@@ -28,7 +28,11 @@ public class ImageToText {
         this.name = name;
     }
 
-    public void gifMake() {
+    public void toText(){
+
+    }
+
+    public void gifMake(Color background) {
 
 
         GifSequenceWriter writ;
@@ -56,7 +60,6 @@ public class ImageToText {
                     imgpass = inbuff[count].getImage();
 
                     //file.createNewFile();
-                    String conglomerate;
                     //FileWriter fw = new FileWriter(file);
                     StringWriter sw = new StringWriter();
                     BufferedWriter bw = new BufferedWriter(sw);
@@ -130,7 +133,7 @@ public class ImageToText {
 
                     //BufferedReader br = new BufferedReader(new FileReader("C:\\Images\\gifs\\converted\\textform\\" + name + "\\" + name + "-" + count + ".txt"));
                     BufferedReader br = new BufferedReader(new StringReader(sw.toString()));
-                    BufferedImage image = new TextToGraphicConverter().convertTextToGraphic(new Font("Courier New", Font.PLAIN, 10), br, height, width);
+                    BufferedImage image = new TextToGraphicConverter().convertTextToGraphic(new Font("Courier New", Font.PLAIN, 10), br, height, background);
                     //write BufferedImage to file
                     //outbuff[count]= new ImageFrame(image, inbuff[count].getDelay(), inbuff[count].getDisposal(), image.getWidth(), image.getHeight());
                     writ.writeToSequence(image);
@@ -375,7 +378,7 @@ public class ImageToText {
             }
         }
     }
-    public void colorText(){
+    public void colorText(Color background){
         GifSequenceWriter writ;
         BufferedImage img;
         BufferedImage imgpass;
@@ -488,7 +491,7 @@ public class ImageToText {
 
                 //BufferedReader br = new BufferedReader(new FileReader("C:\\Images\\gifs\\converted\\textform\\" + name + "\\" + name + "-" + count + ".txt"));
                 BufferedReader br = new BufferedReader(new StringReader(sw.toString()));
-                BufferedImage image = new TextToGraphicConverter().convertColorTextToGraphic(new Font("Courier New", Font.BOLD, 10), br, height, width, colorvals);
+                BufferedImage image = new TextToGraphicConverter().convertColorTextToGraphic(new Font("Courier New", Font.BOLD, 10), br, height, background, colorvals);
                 //write BufferedImage to file
                 //outbuff[count]= new ImageFrame(image, inbuff[count].getDelay(), inbuff[count].getDisposal(), image.getWidth(), image.getHeight());
                 writ.writeToSequence(image);
