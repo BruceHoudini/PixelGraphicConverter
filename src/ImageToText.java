@@ -493,7 +493,7 @@ public class ImageToText {
 
                 //BufferedReader br = new BufferedReader(new FileReader("C:\\Images\\gifs\\converted\\textform\\" + name + "\\" + name + "-" + count + ".txt"));
                 BufferedReader br = new BufferedReader(new StringReader(sw.toString()));
-                BufferedImage image = new TextToGraphicConverter().convertColorTextToGraphic(new Font("Courier New", Font.BOLD, 10), br, height, background, colorvals);
+                BufferedImage image = new TextToGraphicConverter().convertColorTextToGraphic(new Font("Courier New", Font.BOLD, 30), br, height, background, colorvals);
                 makeBackTransparent(image, background);
                 //write BufferedImage to file
                 //outbuff[count]= new ImageFrame(image, inbuff[count].getDelay(), inbuff[count].getDisposal(), image.getWidth(), image.getHeight());

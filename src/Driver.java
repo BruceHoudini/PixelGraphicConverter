@@ -11,7 +11,7 @@ public class Driver {
         String fileName = "praiseit";
         int loop = 1;
         //Resultant imagesize = (OriginalWidth/reduceBy * font.maxAdvance) x (OriginalHeight/reduceby * font.maxAscent)
-        int reduceBy = 2;
+        int reduceBy = 8;
         if (loop == 1) {
             ImageToText itt = new ImageToText(fileName);
             itt.colorText(Color.WHITE, reduceBy);
