@@ -388,7 +388,9 @@ public class ImageToText {
             ImageOutputStream output = new FileImageOutputStream(new File("C:\\Images\\gifs\\recombined\\" + name + ".gif"));
             FileInputStream fis = new FileInputStream(new File("C:\\Images\\gifs\\original\\" + name + ".gif"));
             inbuff = readGif(fis);
-            writ = new GifSequenceWriter(output, BufferedImage.TYPE_INT_RGB, inbuff[1].getDelay(), Boolean.TRUE);
+
+            //HEY! NOTE! PROGRAM WAS WORKING WHEN BUFFEREDIMAGE.TYPE_INT_RGB. Changed to ARGB FOR TRANSPARENCY TESTING.
+            writ = new GifSequenceWriter(output, BufferedImage.TYPE_INT_ARGB, inbuff[1].getDelay(), Boolean.TRUE);
 
 
             //framesToFile(inbuff);
@@ -481,7 +483,7 @@ public class ImageToText {
                             bw.write("&");
                         else
                             bw.write("?");
-                        colorvals.add(new Color(r, g, b));
+                        colorvals.add(new Color(r, g, b, 255));
                     }
                     bw.newLine();
                 }
@@ -492,6 +494,7 @@ public class ImageToText {
                 //BufferedReader br = new BufferedReader(new FileReader("C:\\Images\\gifs\\converted\\textform\\" + name + "\\" + name + "-" + count + ".txt"));
                 BufferedReader br = new BufferedReader(new StringReader(sw.toString()));
                 BufferedImage image = new TextToGraphicConverter().convertColorTextToGraphic(new Font("Courier New", Font.BOLD, 10), br, height, background, colorvals);
+                makeBackTransparent(image, background);
                 //write BufferedImage to file
                 //outbuff[count]= new ImageFrame(image, inbuff[count].getDelay(), inbuff[count].getDisposal(), image.getWidth(), image.getHeight());
                 writ.writeToSequence(image);
@@ -508,6 +511,25 @@ public class ImageToText {
             e.printStackTrace();
         }
 
+    }
+
+    //Sets all white pixels within image to be transparent.
+    public void makeBackTransparent(BufferedImage bi, Color background){
+
+        int markerRGB = background.getRGB() | 0xFFFFFFFF;
+
+        int height = bi.getHeight();
+        int width = bi.getWidth();
+        int compare;
+
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                compare = bi.getRGB(j, i) | 0xFF000000;
+                if (compare == markerRGB){
+                    bi.setRGB(j, i, 0x00FFFFFF);
+                }
+            }
+        }
     }
 }
 

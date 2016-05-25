@@ -8,10 +8,10 @@ import java.awt.*;
  */
 public class Driver {
     public static void main(String[] args){
-        String fileName = "smokehands";
+        String fileName = "praiseit";
         int loop = 1;
         //Resultant imagesize = (OriginalWidth/reduceBy * font.maxAdvance) x (OriginalHeight/reduceby * font.maxAscent)
-        int reduceBy = 4;
+        int reduceBy = 2;
         if (loop == 1) {
             ImageToText itt = new ImageToText(fileName);
             itt.colorText(Color.WHITE, reduceBy);

@@ -79,12 +79,26 @@ public class TextToGraphicConverter {
         g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
         g2d.setFont(font);
         fm = g2d.getFontMetrics();
+        //float alpha = 0f;
+        //int type = AlphaComposite.SRC;
+        //AlphaComposite composite = AlphaComposite.getInstance(type, alpha);
+        //g2d.setComposite(composite);
+        //Composite original = g2d.getComposite();
+        //g2d.setComposite(composite);
+        //g2d.setBackground(background);
+        //g2d.setColor(g2d.getBackground());
+        //g2d.drawRect(0, 0, width, height*(lines-1));
+        //g2d.setComposite(AlphaComposite.Clear);
+        //g2d.setComposite(AlphaComposite.Src);
         g2d.setColor(background);
-        g2d.drawRect(0, 0, width, height*(lines-1));
+        //g2d.drawRect(0, 0, width, height*(lines-1));
         g2d.fillRect(0, 0, width, height*(lines-1));
+        //composite = AlphaComposite.getInstance(AlphaComposite.SRC, 1f);
+        //g2d.setComposite(composite);
+        //g2d.setComposite(AlphaComposite.Src);
         int charwidth = fm.getMaxAdvance();
         int colorcount = 0;
-        for (int i = 0; i*height < height*(lines-1); i++) {
+        for (int i = 0; i*height < height*(lines); i++) {
             for (int j = 0; j * charwidth < width; j++) {
                 g2d.setColor(colorlist.get(colorcount));
                 g2d.drawString(Character.toString(text.charAt(j)), j*charwidth, i*height);
