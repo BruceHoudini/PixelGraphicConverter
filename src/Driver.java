@@ -13,10 +13,12 @@ public class Driver {
     public static void main(String[] args){
 
         int simpleswitch = 1;
-        String fileName = "headtest";
-        String extension = ".png";
-        int reduceBy = 1;
+        String fileName = "ripples";
+        String extension = ".gif";
+        int reduceBy = 2;
         ColorTag colortype = ColorTag.SNES;
+        boolean dithering = true;
+
         FType filetype;
         if (extension.compareTo(".gif") == 0)
             filetype = FType.GIF_TYPE;
@@ -45,10 +47,10 @@ public class Driver {
             }
         }
         else {
-            int blockSize = 2;
-            int expandSize = 4;
+            int blockSize = 1;
+            int expandSize = 2;
             ImageToText itt = new ImageToText(fileName, extension, filetype, colortype);
-            itt.blockImageCreate(reduceBy, blockSize, expandSize);
+            itt.blockImageCreate(reduceBy, blockSize, expandSize, dithering);
         }
     }
 }

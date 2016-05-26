@@ -46,7 +46,7 @@ public class ImageToText {
         Color colorMethod(int r, int g, int b);
     }*/
 
-    public void populateColorArray(Color[][] carray, BufferedImage im, int cwidth, int cdepth, int blockSize){
+    public void populateColorArray(Color[][] carray, BufferedImage im, int cwidth, int cdepth, int blockSize, boolean dithering){
         int pixel;
         int d = blockSize*blockSize;
         int r, g, b;
@@ -70,20 +70,86 @@ public class ImageToText {
                     b += pixel & 0xff;
                 }
             }
-            if(colortype == ColorTag.NES)
-                carray[i][cdepth] = colorNES(r/d, g/d, b/d);
-            if(colortype == ColorTag.SNES)
-                carray[i][cdepth] = color15Bit(r/d, g/d, b/d);
+            if(!dithering) {
+                if (colortype == ColorTag.NES)
+                    carray[i][cdepth] = colorNES(r / d, g / d, b / d);
+                if (colortype == ColorTag.SNES)
+                    carray[i][cdepth] = color15Bit(r / d, g / d, b / d);
+            }
+            else
+               carray[i][cdepth] = new Color(r / d, g / d, b / d);
         }
     }
-    /*//Floyd-Steinberg Dithering algorithm
+    //Floyd-Steinberg Dithering algorithm
     public void ditherFS(BufferedImage img){
         int width = img.getWidth();
         int height = img.getHeight();
-        for (int i = 0; i < height; )
-    }*/
+        int oldpixel, newpixel, temppixel, r, g, b, rn, gn, bn;
+        double quantr, quantg, quantb;
+        for (int i = 0; i < height; i++){
+            for (int j = 0; j < width; j++){
+                oldpixel = img.getRGB(j, i);
+                r = (oldpixel & 0xff0000) >> 16;
+                g = (oldpixel & 0xff00) >> 8;
+                b = (oldpixel & 0xff);
+                if(colortype == ColorTag.NES)
+                    newpixel = colorNES(r, g, b).getRGB();
+                else
+                    newpixel = color15Bit(r, g, b).getRGB();
+                rn = (newpixel & 0xff0000) >> 16;
+                gn = (newpixel & 0xff00) >> 8;
+                bn = (newpixel & 0xff);
 
-    public void blockImageCreate(int reduceBy, int blockSize, int expandSize){
+                img.setRGB(j, i, new Color(rn, gn, bn).getRGB());
+
+                quantr = r - rn;
+                quantg = g - gn;
+                quantb = b - bn;
+                if(j < width-1) {
+                    temppixel = img.getRGB(j + 1, i);
+                    rn = (temppixel & 0xff0000) >> 16;
+                    gn = (temppixel & 0xff00) >> 8;
+                    bn = (temppixel & 0xff);
+                    rn += quantr * (7 / 16);
+                    gn += quantg * (7 / 16);
+                    bn += quantg * (7 / 16);
+                    img.setRGB(j + 1, i, new Color(rn, gn, bn).getRGB());
+                }
+                if(i < height - 1 && j > 1) {
+                    temppixel = img.getRGB(j - 1, i + 1);
+                    rn = (temppixel & 0xff0000) >> 16;
+                    gn = (temppixel & 0xff00) >> 8;
+                    bn = (temppixel & 0xff);
+                    rn += quantr * (3 / 16);
+                    gn += quantg * (3 / 16);
+                    bn += quantg * (3 / 16);
+                    img.setRGB(j - 1, i + 1, new Color(rn, gn, bn).getRGB());
+                }
+                if(i < height -1) {
+                    temppixel = img.getRGB(j, i + 1);
+                    rn = (temppixel & 0xff0000) >> 16;
+                    gn = (temppixel & 0xff00) >> 8;
+                    bn = (temppixel & 0xff);
+                    rn += quantr * (5 / 16);
+                    gn += quantg * (5 / 16);
+                    bn += quantg * (5 / 16);
+                    img.setRGB(j, i + 1, new Color(rn, gn, bn).getRGB());
+                }
+                if (j < width - 1 && i < height -1) {
+                    temppixel = img.getRGB(j + 1, i + 1);
+                    rn = (temppixel & 0xff0000) >> 16;
+                    gn = (temppixel & 0xff00) >> 8;
+                    bn = (temppixel & 0xff);
+                    rn += quantr * (1 / 16);
+                    gn += quantg * (1 / 16);
+                    bn += quantg * (1 / 16);
+                    img.setRGB(j + 1, i + 1, new Color(rn, gn, bn).getRGB());
+                }
+            }
+        }
+    }
+
+    public void blockImageCreate(int reduceBy, int blockSize, int expandSize, boolean ditheringcheck){
         GifSequenceWriter writ = null;
         ImageOutputStream output = null;
         FileInputStream fis;
@@ -128,9 +194,10 @@ public class ImageToText {
 
                 //System.out.println("THIS IS THE VALUE OF BWIDTH: " + bwidth);
                 //System.out.println("THIS IS THE VALUE OF BHEIGHT: " + bheight);
-
+                if (ditheringcheck)
+                    ditherFS(img);
                 for (int i = 0; i < bheight; i++)
-                    populateColorArray (colorarray, img, bwidth, i, blockSize);
+                    populateColorArray (colorarray, img, bwidth, i, blockSize, ditheringcheck);
 
                 BufferedImage image = new BlockGraphicConverter().convertToBlockGraphic(colorarray, bwidth, bheight, expandSize);
 
