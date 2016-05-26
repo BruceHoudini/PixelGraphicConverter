@@ -1,8 +1,56 @@
+import java.awt.*;
+
 /**
  * Created by Weston Ford on 2/12/2016.
  */
 public class Palette {
-    public static int[] nescolors =
+    public Color colorNES(int r, int g, int b){
+        int x = nescolors.length;
+        double rn, gn, bn, low, compare;
+        int match = 0;
+
+        int pixel = nescolors[0];
+        rn = (pixel & 0xff0000) >> 16;
+        gn = (pixel & 0xff00) >> 8;
+        bn = pixel & 0xff;
+        low = Math.sqrt(Math.pow(rn - r, 4) + Math.pow(gn - g, 4) + Math.pow(bn - b, 4));
+
+        for(int i = 1; i < x; i++) {
+            pixel = nescolors[i];
+            rn = (pixel & 0xff0000) >> 16;
+            gn = (pixel & 0xff00) >> 8;
+            bn = pixel & 0xff;
+
+            compare = Math.sqrt(Math.pow(rn - r, 2) + Math.pow(gn - g, 2) + Math.pow(bn - b, 2));
+
+            if (compare < low) {
+                low = compare;
+                match = i;
+            }
+        }
+        return new Color(nescolors[match]);
+    }
+
+    public Color color15Bit(int r, int g, int b){
+        int valr, valg, valb;
+        valr = Math.round(r/32);
+        if (valr == 8)
+            valr = 255;
+        else
+            valr = valr*32;
+        valg = Math.round(g/32);
+        if (valg == 8)
+            valg = 255;
+        else
+            valg = valg*32;
+        valb = Math.round(b/32);
+        if (valb == 8)
+            valb = 255;
+        else
+            valb = valb*32;
+        return new Color(valr, valg, valb);
+    }
+    public int[] nescolors =
             {0x7C7C7C,
             0x0000FC,
             0x0000BC,

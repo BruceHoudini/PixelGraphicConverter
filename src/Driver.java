@@ -13,7 +13,7 @@ public class Driver {
     public static void main(String[] args){
 
         int simpleswitch = 1;
-        String fileName = "ripples";
+        String fileName = "spiral";
         String extension = ".gif";
         int reduceBy = 2;
         ColorTag colortype = ColorTag.SNES;
