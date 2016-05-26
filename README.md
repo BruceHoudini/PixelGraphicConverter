@@ -2,8 +2,8 @@
 It's a Gif to text to Gif conversion tool written in java for when you need to convert your Gif into a text file 
 composed of black-and-white asterisks, carets, and apostrophes and then back into an animated Gif. 
 
-(In reverse chronological order).
-Updates:
+(In reverse chronological order)<br>
+<em>Updates:</em>
 
 -Added Floyd-Steinberg dithering for color-palette reduction. <br>
 -Added alternate color palettes and color replacement options (64 color NES model and 15bit SNES model).<br>
