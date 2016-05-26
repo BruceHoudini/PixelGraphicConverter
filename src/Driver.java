@@ -6,22 +6,49 @@ import java.awt.*;
  * Imported code credited on location.
  *
  */
+
+//Resultant imagesize = (OriginalWidth/reduceBy * font.maxAdvance) x (OriginalHeight/reduceby * font.maxAscent)
+
 public class Driver {
     public static void main(String[] args){
-        String fileName = "praiseit";
-        int loop = 1;
-        //Resultant imagesize = (OriginalWidth/reduceBy * font.maxAdvance) x (OriginalHeight/reduceby * font.maxAscent)
-        int reduceBy = 8;
-        if (loop == 1) {
-            ImageToText itt = new ImageToText(fileName);
-            itt.colorText(Color.WHITE, reduceBy);
-        }
-        if (loop > 1) {
-            while (loop < 4) {
-                ImageToText itt = new ImageToText(fileName + loop);
-                itt.colorText(Color.BLACK, reduceBy);
-                loop++;
+
+        int simpleswitch = 1;
+        String fileName = "headtest";
+        String extension = ".png";
+        int reduceBy = 1;
+        ColorTag colortype = ColorTag.SNES;
+        FType filetype;
+        if (extension.compareTo(".gif") == 0)
+            filetype = FType.GIF_TYPE;
+        else
+            filetype = FType.PNG_TYPE;
+
+
+        if(simpleswitch == 0) {
+            int fontsize = 20;
+            boolean transparency = true;
+            Color background = Color.WHITE;
+
+            int loop = 1;
+
+
+            if (loop == 1) {
+                ImageToText itt = new ImageToText(fileName, extension, filetype, colortype);
+                itt.colorText(background, reduceBy, fontsize, transparency);
             }
+            if (loop > 1) {
+                while (loop < 4) {
+                    ImageToText itt = new ImageToText(fileName + loop, extension, filetype, colortype);
+                    itt.colorText(background, reduceBy, fontsize, transparency);
+                    loop++;
+                }
+            }
+        }
+        else {
+            int blockSize = 2;
+            int expandSize = 4;
+            ImageToText itt = new ImageToText(fileName, extension, filetype, colortype);
+            itt.blockImageCreate(reduceBy, blockSize, expandSize);
         }
     }
 }

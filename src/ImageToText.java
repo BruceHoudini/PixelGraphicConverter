@@ -14,6 +14,7 @@ import java.awt.image.ColorModel;
 import java.awt.image.WritableRaster;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Timer;
 
 /**
  * Created by Weston Ford on 2/12/2016.
@@ -21,20 +22,255 @@ import java.util.ArrayList;
 public class ImageToText {
 
     private String name;
+    private String extension;
+    private FType filetype;
+    private ColorTag colortype;
     private ImageFrame[] inbuff;
 
 
-    public ImageToText(String name){
+    public ImageToText(String name, String extension, FType filetype, ColorTag colortype){
         this.name = name;
+        this.extension = extension;
+        this.filetype = filetype;
+        this.colortype = colortype;
+
     }
 
     public void toText(){
+        //Partitioned text function
+        //Previously implemented but removed
+        //Should be reimplemented here as its own method
+    }
+    /*@FunctionalInterface
+    public void variableColorMethod{
+        Color colorMethod(int r, int g, int b);
+    }*/
+
+    public void populateColorArray(Color[][] carray, BufferedImage im, int cwidth, int cdepth, int blockSize){
+        int pixel;
+        int d = blockSize*blockSize;
+        int r, g, b;
+       // VariableColorInterface colorConvert;
+       //colorConvert = (r1, g1, b1) -> ImageToText.color15Bit(r1, g1, b1);
+        //if (colortype == ColorTag.NES)
+        //    colorConvert.colorMethod = colorNES();
+        int compare, match;
+        for (int i = 0; i < cwidth; i++){
+            r = 0;
+            g = 0;
+            b = 0;
+            pixel = 0;
+            compare = 0;
+            match = 0;
+            for (int j = cdepth*blockSize; j < cdepth*blockSize + blockSize; j++){
+                for (int k = 0; k < blockSize; k++){
+                    pixel = im.getRGB(i*blockSize + k, j);
+                    r += (pixel & 0xff0000) >> 16;
+                    g += (pixel & 0xff00) >> 8;
+                    b += pixel & 0xff;
+                }
+            }
+            if(colortype == ColorTag.NES)
+                carray[i][cdepth] = colorNES(r/d, g/d, b/d);
+            if(colortype == ColorTag.SNES)
+                carray[i][cdepth] = color15Bit(r/d, g/d, b/d);
+        }
+    }
+    /*//Floyd-Steinberg Dithering algorithm
+    public void ditherFS(BufferedImage img){
+        int width = img.getWidth();
+        int height = img.getHeight();
+        for (int i = 0; i < height; )
+    }*/
+
+    public void blockImageCreate(int reduceBy, int blockSize, int expandSize){
+        GifSequenceWriter writ = null;
+        ImageOutputStream output = null;
+        FileInputStream fis;
+        BufferedImage img;
+        BufferedImage imgpass;
+        int count = 0;
+        int frames = 1;
+
+        try {
+            if(filetype == FType.GIF_TYPE){
+                output = new FileImageOutputStream(new File("C:\\Images\\gifs\\recombined\\" + name + "-" + colortype + ".gif"));
+                fis = new FileInputStream(new File("C:\\Images\\gifs\\original\\" + name + ".gif"));
+                inbuff = readGif(fis);
+                writ = new GifSequenceWriter(output, BufferedImage.TYPE_INT_ARGB, inbuff[1].getDelay(), Boolean.TRUE);
+                frames = inbuff.length;
+                System.out.println("Frame Count: " + inbuff.length);
+            }
+            Timer clock = new Timer();
+
+            System.out.println("Beginning image scan.");
+            long startTime = System.currentTimeMillis();
+            while (count < frames) {
+
+                if (filetype == FType.GIF_TYPE)
+                    imgpass = inbuff[count].getImage();
+                else
+                    imgpass = ImageIO.read(new File("C:\\Images\\original\\" + name + extension));
+
+                int width = imgpass.getWidth();
+                int height = imgpass.getHeight();
+
+
+                img = scale(imgpass, width / reduceBy, height / reduceBy);
+
+                width = img.getWidth();
+                height = img.getHeight();
+                int bwidth = width/blockSize;
+                int bheight = height/blockSize;
+
+
+                Color[][] colorarray = new Color[bwidth][bheight];
+
+                //System.out.println("THIS IS THE VALUE OF BWIDTH: " + bwidth);
+                //System.out.println("THIS IS THE VALUE OF BHEIGHT: " + bheight);
+
+                for (int i = 0; i < bheight; i++)
+                    populateColorArray (colorarray, img, bwidth, i, blockSize);
+
+                BufferedImage image = new BlockGraphicConverter().convertToBlockGraphic(colorarray, bwidth, bheight, expandSize);
+
+                if (filetype == FType.GIF_TYPE)
+                    writ.writeToSequence(image);
+                else
+                    ImageIO.write(image, "png", new File("C:\\Images\\png\\converted\\" + name + "-" + colortype + ".png"));
+
+                count++;
+            }
+            if(filetype == FType.GIF_TYPE) {
+                writ.close();
+                output.close();
+            }
+            long endtime = System.currentTimeMillis();
+            double tottime = endtime - startTime;
+            System.out.println("Process Complete.");
+            System.out.println("Total elapsed time: " + tottime/1000 + "s");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("TRYING TO CATCH LEAK");
+    }
+
+    public void colorText(Color background, int reduceBy, int fontsize, boolean transparency){
+        GifSequenceWriter writ = null;
+        ImageOutputStream output = null;
+        FileInputStream fis;
+        BufferedImage img;
+        BufferedImage imgpass;
+        int count = 0;
+        int frames = 1;
+
+        try {
+            if(filetype == FType.GIF_TYPE){
+                output = new FileImageOutputStream(new File("C:\\Images\\gifs\\recombined\\" + name + ".gif"));
+                fis = new FileInputStream(new File("C:\\Images\\gifs\\original\\" + name + ".gif"));
+                inbuff = readGif(fis);
+                writ = new GifSequenceWriter(output, BufferedImage.TYPE_INT_ARGB, inbuff[1].getDelay(), Boolean.TRUE);
+                frames = inbuff.length;
+                System.out.println("Frame Count: " + inbuff.length);
+            }
+            Timer clock = new Timer();
+
+            System.out.println("Beginning image scan.");
+            long startTime = System.currentTimeMillis();
+            while (count < frames) {
+                ArrayList<Color> colorvals = new ArrayList<>();
+                colorvals.clear();
+
+                if (filetype == FType.GIF_TYPE)
+                    imgpass = inbuff[count].getImage();
+                else
+                    imgpass = ImageIO.read(new File("C:\\Images\\original\\" + name + extension));
+
+                StringWriter sw = new StringWriter();
+                BufferedWriter bw = new BufferedWriter(sw);
+
+                int width = imgpass.getWidth();
+                int height = imgpass.getHeight();
+
+
+                img = scale(imgpass, width / reduceBy, height / reduceBy);
+
+                width = img.getWidth();
+                height = img.getHeight();
+
+                int pixel;
+                int r;
+                int g;
+                int b;
+
+                for (int i = 0; i < height; i++) {
+                    for (int j = 0; j < width; j++) {
+                        pixel = img.getRGB(j, i);
+                        r = (pixel & 0xff0000) >> 16;
+                        g = (pixel & 0xff00) >> 8;
+                        b = pixel & 0xff;
+                        if (Math.abs(b-r) < 10 && Math.abs(b-g) < 10 && Math.abs(g-r) < 10){
+                            if (b < 245 || r < 245 || g < 245) {
+                                if (b < 200 || r < 200 || g < 200){
+                                    if (b < 125 || r < 125 || g < 125) {
+                                        if (b > 50 || r > 50 || g > 50)
+                                            bw.write("^");
+                                        else
+                                            bw.write("*");
+                                    }
+                                    else
+                                        bw.write("i");
+                                } else
+                                    bw.write("e");
+                            } else
+                                bw.write("#");
+                        }
+                        else if (r > g && r > b)
+                            bw.write("%");
+                        else if (g > r && g > b)
+                            bw.write("$");
+                        else if (b > g && b > r)
+                            bw.write("&");
+                        else
+                            bw.write("?");
+                        colorvals.add(new Color(r, g, b, 255));
+                    }
+                    bw.newLine();
+                }
+                bw.close();
+
+                BufferedReader br = new BufferedReader(new StringReader(sw.toString()));
+                BufferedImage image = new TextToGraphicConverter().convertColorTextToGraphic(new Font("Courier New", Font.BOLD, fontsize), br, height, background, colorvals);
+
+                if (transparency)
+                    makeBackTransparent(image, background);
+                if (filetype == FType.GIF_TYPE)
+                    writ.writeToSequence(image);
+                else
+                    ImageIO.write(image, "png", new File("C:\\Images\\png\\converted\\" + name + ".png"));
+
+                count++;
+                br.close();
+            }
+            if(filetype == FType.GIF_TYPE) {
+                writ.close();
+                output.close();
+            }
+            long endtime = System.currentTimeMillis();
+            double tottime = endtime - startTime;
+            System.out.println("Process Complete.");
+            System.out.println("Total elapsed time: " + tottime/1000 + "s");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
     public void gifMake(Color background, int reduceBy) {
-
-
         GifSequenceWriter writ;
         BufferedImage img;
         BufferedImage imgpass;
@@ -378,140 +614,6 @@ public class ImageToText {
             }
         }
     }
-    public void colorText(Color background, int reduceBy){
-        GifSequenceWriter writ;
-        BufferedImage img;
-        BufferedImage imgpass;
-        int count = 0;
-
-        try {
-            ImageOutputStream output = new FileImageOutputStream(new File("C:\\Images\\gifs\\recombined\\" + name + ".gif"));
-            FileInputStream fis = new FileInputStream(new File("C:\\Images\\gifs\\original\\" + name + ".gif"));
-            inbuff = readGif(fis);
-
-            //HEY! NOTE! PROGRAM WAS WORKING WHEN BUFFEREDIMAGE.TYPE_INT_RGB. Changed to ARGB FOR TRANSPARENCY TESTING.
-            writ = new GifSequenceWriter(output, BufferedImage.TYPE_INT_ARGB, inbuff[1].getDelay(), Boolean.TRUE);
-
-
-            //framesToFile(inbuff);
-            //scaledFramesToFile(inbuff);
-
-            //imgpass = ImageIO.read(new File("C:\\Images\\gifs\\expanded\\" + name + "\\tmp-" + count + ".gif"));
-            //File file = new File("C:\\Images\\gifs\\converted\\textform\\" + name + "\\" + name + "-" + i + ".txt");
-
-            System.out.println("This is the length of inbuff: " + inbuff.length);
-
-            while (count < inbuff.length) {
-                ArrayList<Color> colorvals = new ArrayList<>();
-                colorvals.clear();
-                //File file = new File("C:\\Images\\gifs\\converted\\textform\\" + name + "\\" + name + "-" + count + ".txt");
-                imgpass = inbuff[count].getImage();
-
-                //file.createNewFile();
-                //FileWriter fw = new FileWriter(file);
-                StringWriter sw = new StringWriter();
-                BufferedWriter bw = new BufferedWriter(sw);
-                //boolean hasAlphaChannel = imgpass.getAlphaRaster() != null;
-                int width = imgpass.getWidth();
-                int height = imgpass.getHeight();
-
-                //img = imgpass;
-
-                img = scale(imgpass, width / reduceBy, height / reduceBy);
-
-                width = img.getWidth();
-                height = img.getHeight();
-
-                int pixel;
-                int r;
-                int g;
-                int b;
-                //int a;
-
-
-                //Alpha value handling is causing problems.
-                //Gif expansion with readGif() adds alpha value field.
-                //On images which do not have alpha values.
-                    /*
-                    if (width < 2) {
-                        for (int i = 0; i < height; i++) {
-                            for (int j = 0; j < width; j++) {
-                                pixel = img.getRGB(j, i);
-
-                                a = (pixel & 0xff000000) >>> 24;
-                                r = (pixel & 0xff0000) >> 16;
-                                g = (pixel & 0xff00) >> 8;
-                                b = pixel & 0xff;
-
-                                if (a > 122) {
-                                    if (b < 122 || g < 122 || r < 122) {
-                                        bw.write("*");
-                                    }
-                                } else
-                                    bw.write(" ");
-                            }
-                            bw.newLine();
-                        }
-                    }*/
-                for (int i = 0; i < height; i++) {
-                    for (int j = 0; j < width; j++) {
-                        pixel = img.getRGB(j, i);
-                        r = (pixel & 0xff0000) >> 16;
-                        g = (pixel & 0xff00) >> 8;
-                        b = pixel & 0xff;
-                        if (Math.abs(b-r) < 10 && Math.abs(b-g) < 10 && Math.abs(g-r) < 10){
-                            if (b < 245 || r < 245 || g < 245) {
-                                if (b < 200 || r < 200 || g < 200){
-                                if (b < 125 || r < 125 || g < 125) {
-                                    if (b > 50 || r > 50 || g > 50)
-                                        bw.write("^");
-                                    else
-                                        bw.write("*");
-                                }
-                                else
-                                    bw.write("i");
-                                } else
-                                    bw.write("e");
-                            } else
-                                bw.write("#");
-                        }
-                        else if (r > g && r > b)
-                            bw.write("%");
-                        else if (g > r && g > b)
-                            bw.write("$");
-                        else if (b > g && b > r)
-                            bw.write("&");
-                        else
-                            bw.write("?");
-                        colorvals.add(new Color(r, g, b, 255));
-                    }
-                    bw.newLine();
-                }
-
-                bw.close();
-
-
-                //BufferedReader br = new BufferedReader(new FileReader("C:\\Images\\gifs\\converted\\textform\\" + name + "\\" + name + "-" + count + ".txt"));
-                BufferedReader br = new BufferedReader(new StringReader(sw.toString()));
-                BufferedImage image = new TextToGraphicConverter().convertColorTextToGraphic(new Font("Courier New", Font.BOLD, 30), br, height, background, colorvals);
-                makeBackTransparent(image, background);
-                //write BufferedImage to file
-                //outbuff[count]= new ImageFrame(image, inbuff[count].getDelay(), inbuff[count].getDisposal(), image.getWidth(), image.getHeight());
-                writ.writeToSequence(image);
-                //ImageIO.write(image, "png", new File("C:\\Images\\gifs\\converted\\imageform\\" + name + "\\" + name + "-" + count + ".png"));
-
-                count++;
-                br.close();
-            }
-            writ.close();
-            output.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
 
     //Sets all white pixels within image to be transparent.
     public void makeBackTransparent(BufferedImage bi, Color background){
@@ -530,6 +632,57 @@ public class ImageToText {
                 }
             }
         }
+    }
+    public Color colorNES(int r, int g, int b){
+        int x = Palette.nescolors.length;
+        double rn, gn, bn, low, compare;
+        int match = 0;
+
+        int pixel = Palette.nescolors[0];
+        rn = (pixel & 0xff0000) >> 16;
+        gn = (pixel & 0xff00) >> 8;
+        bn = pixel & 0xff;
+        low = Math.pow(Math.abs(rn - r), 4) + Math.pow(Math.abs(gn - g), 4) + Math.pow(Math.abs(bn - b), 4);
+
+        for(int i = 1; i < x; i++) {
+            pixel = Palette.nescolors[i];
+            rn = (pixel & 0xff0000) >> 16;
+            gn = (pixel & 0xff00) >> 8;
+            bn = pixel & 0xff;
+
+                //r*=1.0;
+
+                //g*=1.0;
+
+                //b*=1.0;
+            compare = Math.pow(Math.abs(rn - r), 2) + Math.pow(Math.abs(gn - g), 2) + Math.pow(Math.abs(bn - b), 2);
+
+            if (compare < low) {
+                low = compare;
+                match = i;
+            }
+        }
+        return new Color(Palette.nescolors[match]);
+    }
+
+    public Color color15Bit(int r, int g, int b){
+        int valr, valg, valb;
+        valr = Math.round(r/32);
+        if (valr == 8)
+            valr = 255;
+        else
+            valr = valr*32;
+        valg = Math.round(g/32);
+        if (valg == 8)
+            valg = 255;
+        else
+            valg = valg*32;
+        valb = Math.round(b/32);
+        if (valb == 8)
+            valb = 255;
+        else
+            valb = valb*32;
+        return new Color(valr, valg, valb);
     }
 }
 
