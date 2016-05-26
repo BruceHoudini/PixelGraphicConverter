@@ -1,6 +1,8 @@
 # UselessGifTextGifConverter
-It's a Gif to text to Gif conversion tool written in java for when you need to convert your Gif into a text file 
-composed of black-and-white asterisks, carets, and apostrophes and then back into an animated Gif. 
+Toolkit for modifying gifs and images.<br>
+Currently supporting compression, expansion, creative ascii and color palette conversions.<br>
+My objective is to create a simple program which can convert a given image or gif into a limited ascii or pixelart representation using reduced color palettes from archaic computers and video game consoles. While the truth is that I am creating this for my own enjoyment the "intended" user, should one need to be specified, are game development hobbyists looking to more easily convert images into a specialized graphics style evocative of a particular era of technology for the purpose of facilitating <b>new age fun</b> with a <b>vintage feel.</b>
+
 
 (In reverse chronological order)<br>
 <em>Updates:</em>
