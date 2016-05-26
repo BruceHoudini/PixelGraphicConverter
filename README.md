@@ -4,7 +4,7 @@ Currently supporting compression, expansion, creative ascii and color palette co
 My objective is to create a simple program which can convert a given image or gif into a limited ascii or pixelart representation using reduced color palettes from archaic computers and video game consoles. While the truth is that I am creating this for my own enjoyment the "intended" user, should one need to be specified, are game development hobbyists looking to more easily convert images into a specialized graphics style evocative of a particular era of technology for the purpose of facilitating <b>new age fun</b> with a <b>vintage feel.</b>
 
 <h3>Updates</h3>
-<ol reverse>
+<ol reversed>
 
 <li>Added Floyd-Steinberg dithering for color-palette reduction.</li>
 <li>Added alternate color palettes and color replacement options (64 color NES model and 15bit SNES model).</li>
