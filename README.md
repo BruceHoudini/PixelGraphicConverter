@@ -5,7 +5,7 @@ composed of black-and-white asterisks, carets, and apostrophes and then back int
 (In reverse chronological order).
 Updates:
 
--Added Floyd-Steinberg dithering for color-palette reduction.
+-Added Floyd-Steinberg dithering for color-palette reduction. <br>
 -Added alternate color palettes and color replacement options (64 color NES model and 15bit SNES model).
 -Added different pixel replacement, resizing, and image generation options independent of ascii image generation.
 -Added variable background colors for ascii gif generation along with transparency option.
