@@ -52,6 +52,8 @@ public class ImageToText {
                     carray[i][cdepth] = colorkit.colorNES(r / d, g / d, b / d);
                 if (colortype == ColorTag.SNES)
                     carray[i][cdepth] = colorkit.color15Bit(r / d, g / d, b / d);
+                if (colortype == ColorTag.STD)
+                    carray[i][cdepth] = new Color(r / d, g / d, b / d);
             }
             else
                carray[i][cdepth] = new Color(r / d, g / d, b / d);
@@ -245,6 +247,7 @@ public class ImageToText {
                 int r;
                 int g;
                 int b;
+                int rand=0;
 
                 for (int i = 0; i < height; i++) {
                     for (int j = 0; j < width; j++) {
@@ -252,31 +255,49 @@ public class ImageToText {
                         r = (pixel & 0xff0000) >> 16;
                         g = (pixel & 0xff00) >> 8;
                         b = pixel & 0xff;
+                        //Change multiplied by value to increase or decrease random character occurence
+                        //rand = (int)(Math.random() * 1000);
+
                         if (Math.abs(b-r) < 10 && Math.abs(b-g) < 10 && Math.abs(g-r) < 10){
                             if (b < 245 || r < 245 || g < 245) {
                                 if (b < 200 || r < 200 || g < 200){
                                     if (b < 125 || r < 125 || g < 125) {
                                         if (b > 50 || r > 50 || g > 50)
-                                            bw.write("^");
+                                            bw.write("o");
                                         else
                                             bw.write("*");
                                     }
                                     else
-                                        bw.write("i");
+                                        bw.write("n");
                                 } else
                                     bw.write("e");
                             } else
                                 bw.write("#");
                         }
                         else if (r > g && r > b)
-                            bw.write("%");
+                            if(rand < 123 && rand > 96)
+                                bw.write(rand);
+                            else
+                                bw.write("%");
                         else if (g > r && g > b)
-                            bw.write("$");
+                            if(rand < 123 && rand > 96)
+                                bw.write(rand);
+                            else
+                                bw.write("$");
                         else if (b > g && b > r)
-                            bw.write("&");
+                            if(rand < 123 && rand > 96)
+                                bw.write(rand);
+                            else
+                                bw.write("&");
                         else
-                            bw.write("?");
-                        colorvals.add(new Color(r, g, b, 255));
+                            if(rand < 123 && rand > 96)
+                                bw.write(rand);
+                            else
+                                bw.write("?");
+                        if (background == Color.BLACK)
+                            colorvals.add(new Color(r, g, b, 255).brighter().brighter());
+                        else
+                            colorvals.add(new Color(r, g, b, 255));
                     }
                     bw.newLine();
                 }
