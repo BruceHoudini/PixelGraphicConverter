@@ -21,12 +21,12 @@ import java.awt.*;
 public class Driver {
     public static void main(String[] args){
 
-        int simpleswitch = 0;
-        String fileName = "rain5";
+        int simpleswitch = 1;
+        String fileName = "rain2";
         String extension = ".gif";
-        int reduceBy = 4;
-        ColorTag colortype = ColorTag.STD;
-        boolean dithering = false;
+        int reduceBy = 1;
+        ColorTag colortype = ColorTag.NES;
+        boolean dithering = true;
 
         FType filetype;
         if (extension.compareTo(".gif") == 0)
@@ -36,7 +36,7 @@ public class Driver {
 
 
         if(simpleswitch == 0) {
-            int fontsize = 10;
+            int fontsize = 20;
             boolean transparency = false;
             Color background = Color.BLACK;
 

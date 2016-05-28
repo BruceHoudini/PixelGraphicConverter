@@ -22,7 +22,7 @@ public class BlockGraphicConverter {
         g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         g2d.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
 
-        g2d.setColor(Color.WHITE);
+        g2d.setColor(Color.BLACK);
         g2d.fillRect(0, 0, width*blockSize, height*blockSize);
 
 
@@ -35,15 +35,17 @@ public class BlockGraphicConverter {
         g2d.dispose();
         return img;
     }
-
-   /* public void orderedDither(Color[][] colors, ColorTag tag, int width, int height){
+/*
+    public void orderedDither(Color[][] colors, ColorTag tag, int width, int height){
         Palette colorkit = new Palette();
         double[][] bayermatrix = new int[4][4]{
             {1, 9, 3, 11},
             {13, 5, 15, 7},
+
         }
+        */
 
 
-    }*/
+    }
 
 }

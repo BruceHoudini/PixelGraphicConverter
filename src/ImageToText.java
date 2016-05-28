@@ -47,20 +47,26 @@ public class ImageToText {
                     b += pixel & 0xff;
                 }
             }
-            if(!dithering) {
+            if(dithering == false) {
                 if (colortype == ColorTag.NES)
                     carray[i][cdepth] = colorkit.colorNES(r / d, g / d, b / d);
-                if (colortype == ColorTag.SNES)
+                else if (colortype == ColorTag.SNES)
                     carray[i][cdepth] = colorkit.color15Bit(r / d, g / d, b / d);
-                if (colortype == ColorTag.STD)
+                else if (colortype == ColorTag.MONO)
+                    carray[i][cdepth] = colorkit.color2Bit(r / d, g / d, b / d);
+                else
                     carray[i][cdepth] = new Color(r / d, g / d, b / d);
             }
-            else
-               carray[i][cdepth] = new Color(r / d, g / d, b / d);
+            else {
+                if (blockSize == 1)
+                    carray[i][cdepth] = new Color(r, g, b);
+                else
+                    carray[i][cdepth] = new Color(r / d, g / d, b / d);
+            }
         }
     }
     //Floyd-Steinberg Dithering algorithm
-    public void ditherFS(BufferedImage img){
+    public BufferedImage ditherFS(BufferedImage img){
         int width = img.getWidth();
         int height = img.getHeight();
         int oldpixel, newpixel, temppixel, r, g, b, rn, gn, bn;
@@ -73,25 +79,46 @@ public class ImageToText {
                 b = (oldpixel & 0xff);
                 if(colortype == ColorTag.NES)
                     newpixel = colorkit.colorNES(r, g, b).getRGB();
-                else
+                else if(colortype == ColorTag.SNES)
                     newpixel = colorkit.color15Bit(r, g, b).getRGB();
+                else if(colortype == ColorTag.MONO)
+                    newpixel = colorkit.color2Bit(r, g, b).getRGB();
+                else
+                    newpixel = new Color(r, g, b).getRGB();
+
                 rn = (newpixel & 0xff0000) >> 16;
                 gn = (newpixel & 0xff00) >> 8;
                 bn = (newpixel & 0xff);
 
                 img.setRGB(j, i, new Color(rn, gn, bn).getRGB());
 
-                quantr = r - rn;
-                quantg = g - gn;
-                quantb = b - bn;
+                    quantr = r - rn;
+                    quantg = g - gn;
+                    quantb = b - bn;
+
+
+
+                //System.out.println("quantr = " + quantr + " quantg = " + quantg + "quantb = " + quantb);
                 if(j < width-1) {
                     temppixel = img.getRGB(j + 1, i);
                     rn = (temppixel & 0xff0000) >> 16;
                     gn = (temppixel & 0xff00) >> 8;
                     bn = (temppixel & 0xff);
-                    rn += quantr * (7 / 16);
-                    gn += quantg * (7 / 16);
-                    bn += quantb * (7 / 16);
+                    rn += quantr * (7.0 / 16.0);
+                    gn += quantg * (7.0 / 16.0);
+                    bn += quantb * (7.0 / 16.0);
+                    if (rn < 0)
+                        rn = 0;
+                    else if (rn > 255)
+                        rn = 0;
+                    if (gn < 0)
+                        gn = 0;
+                    else if (gn > 255)
+                        gn = 255;
+                    if (bn < 0)
+                        bn = 0;
+                    else if (bn > 255)
+                        bn = 255;
                     img.setRGB(j + 1, i, new Color(rn, gn, bn).getRGB());
                 }
                 if(i < height - 1 && j > 1) {
@@ -99,9 +126,21 @@ public class ImageToText {
                     rn = (temppixel & 0xff0000) >> 16;
                     gn = (temppixel & 0xff00) >> 8;
                     bn = (temppixel & 0xff);
-                    rn += quantr * (3 / 16);
-                    gn += quantg * (3 / 16);
-                    bn += quantb * (3 / 16);
+                    rn += quantr * (3.0 / 16.0);
+                    gn += quantg * (3.0 / 16.0);
+                    bn += quantb * (3.0 / 16.0);
+                    if (rn < 0)
+                        rn = 0;
+                    else if (rn > 255)
+                        rn = 0;
+                    if (gn < 0)
+                        gn = 0;
+                    else if (gn > 255)
+                        gn = 255;
+                    if (bn < 0)
+                        bn = 0;
+                    else if (bn > 255)
+                        bn = 255;
                     img.setRGB(j - 1, i + 1, new Color(rn, gn, bn).getRGB());
                 }
                 if(i < height -1) {
@@ -109,9 +148,21 @@ public class ImageToText {
                     rn = (temppixel & 0xff0000) >> 16;
                     gn = (temppixel & 0xff00) >> 8;
                     bn = (temppixel & 0xff);
-                    rn += quantr * (5 / 16);
-                    gn += quantg * (5 / 16);
-                    bn += quantb * (5 / 16);
+                    rn += quantr * (5.0 / 16.0);
+                    gn += quantg * (5.0 / 16.0);
+                    bn += quantb * (5.0 / 16.0);
+                    if (rn < 0)
+                        rn = 0;
+                    else if (rn > 255)
+                        rn = 0;
+                    if (gn < 0)
+                        gn = 0;
+                    else if (gn > 255)
+                        gn = 255;
+                    if (bn < 0)
+                        bn = 0;
+                    else if (bn > 255)
+                        bn = 255;
                     img.setRGB(j, i + 1, new Color(rn, gn, bn).getRGB());
                 }
                 if (j < width - 1 && i < height -1) {
@@ -119,13 +170,26 @@ public class ImageToText {
                     rn = (temppixel & 0xff0000) >> 16;
                     gn = (temppixel & 0xff00) >> 8;
                     bn = (temppixel & 0xff);
-                    rn += quantr * (1 / 16);
-                    gn += quantg * (1 / 16);
-                    bn += quantb * (1 / 16);
+                    rn += quantr * (1.0 / 16.0);
+                    gn += quantg * (1.0 / 16.0);
+                    bn += quantb * (1.0 / 16.0);
+                    if (rn < 0)
+                        rn = 0;
+                    else if (rn > 255)
+                        rn = 0;
+                    if (gn < 0)
+                        gn = 0;
+                    else if (gn > 255)
+                        gn = 255;
+                    if (bn < 0)
+                        bn = 0;
+                    else if (bn > 255)
+                        bn = 255;
                     img.setRGB(j + 1, i + 1, new Color(rn, gn, bn).getRGB());
                 }
             }
         }
+        return img;
     }
 
     public void blockImageCreate(int reduceBy, int blockSize, int expandSize, boolean ditheringcheck){
@@ -172,8 +236,8 @@ public class ImageToText {
 
                 //System.out.println("THIS IS THE VALUE OF BWIDTH: " + bwidth);
                 //System.out.println("THIS IS THE VALUE OF BHEIGHT: " + bheight);
-                if (ditheringcheck)
-                    ditherFS(img);
+                if (ditheringcheck == true)
+                    img = ditherFS(img);
                 for (int i = 0; i < bheight; i++)
                     populateColorArray (colorarray, img, bwidth, i, blockSize, ditheringcheck);
 
@@ -381,27 +445,7 @@ public class ImageToText {
                     //Alpha value handling is causing problems.
                     //Gif expansion with toolkit.readGif() adds alpha value field.
                     //On images which do not have alpha values.
-                    /*
-                    if (width < 2) {
-                        for (int i = 0; i < height; i++) {
-                            for (int j = 0; j < width; j++) {
-                                pixel = img.getRGB(j, i);
 
-                                a = (pixel & 0xff000000) >>> 24;
-                                r = (pixel & 0xff0000) >> 16;
-                                g = (pixel & 0xff00) >> 8;
-                                b = pixel & 0xff;
-
-                                if (a > 122) {
-                                    if (b < 122 || g < 122 || r < 122) {
-                                        bw.write("*");
-                                    }
-                                } else
-                                    bw.write(" ");
-                            }
-                            bw.newLine();
-                        }
-                    }*/
                         for (int i = 0; i < height; i++) {
                             for (int j = 0; j < width; j++) {
                                 pixel = img.getRGB(j, i);

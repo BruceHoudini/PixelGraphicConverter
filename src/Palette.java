@@ -50,6 +50,36 @@ public class Palette {
             valb = valb*32;
         return new Color(valr, valg, valb);
     }
+
+    public Color color2Bit(int r, int g, int b){
+        double y = getLuminance(r, g, b);
+        Color color;
+        if (y > .5)
+            color = new Color(255, 255, 255);
+        else
+            color = new Color(0, 0, 0);
+
+        return color;
+    }
+    public double getLuminance(int r, int g, int b){
+        double luminance;
+        //double rd = r;
+        //double gd = g;
+        //double bd = b;
+
+        double rd = (double)r/255;
+        double gd = (double)g/255;
+        double bd = (double)b/255;
+        //double gamma = 2.2;
+
+        //rd = Math.pow(rd, 1/gamma);
+        //gd = Math.pow(gd, 1/gamma);
+       // bd = Math.pow(bd, 1/gamma);
+
+        luminance = .2126*rd + .7152*gd + .0722 * bd;
+        //luminance = (rd + gd + bd)/3;
+        return luminance;
+    }
     public int[] nescolors =
             {0x7C7C7C,
             0x0000FC,
