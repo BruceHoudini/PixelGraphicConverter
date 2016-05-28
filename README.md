@@ -23,11 +23,11 @@ In reverse chronological order.
 <ol type = "I">
   <li>Add additional console specific palette and pixeldepth conversion options.
     <ol type = "i">
-      <li>Original Gameboy 2bit green grayscale</li>
-      <li>Gameboy to Gameboy Color special color options (when placing GB cartridge into GBC) </li>
+      <li>Original Gameboy 2bit green grayscale.</li>
+      <li>Gameboy to Gameboy Color special color options (when placing GB cartridge into GBC).</li>
       <li>Atari 2600 </li>
-      <li>Microsoft Windows default 16 and 20 color palette</li>
-      <li>Apple Macintosh default 16 color palette</li>
+      <li>Microsoft Windows default 16 and 20 color palette.</li>
+      <li>Apple Macintosh default 16 color palette.</li>
     </ol>
   </li>
   <li>Add additional general pixeldepth conversion options.
@@ -49,16 +49,16 @@ In reverse chronological order.
   </li>
   <li>Improve and expand dithering effects and options</li>
     <ol type = "i">
-      <li>ordered dithering using bayer matrices of variable size and pattern</li>
-      <li>threshold dithering</li>
+      <li>Ordered dithering using bayer matrices of variable size and pattern.</li>
+      <li>Threshold dithering.</li>
     </ol>
   </li>
   <li>Various organization and restructring to create more logical method interaction and reduced coupling.
     <ol type = "i">
       <li>ditherFS() should be called after populateColoryArray() and act upon the array rather than the original image.</li>
-      <li>Primary class ImageToText should be renamed to accurately reflect its current function rather than its archaic function</li>
+      <li>Primary class ImageToText should be renamed to accurately reflect its current function rather than its archaic function.</li>
       <li>Various other methods should be renamed to accurately reflect their current functions.</li>
-      <li>Place into new method commented out code responsible for creating ascii representations of images as text files</li>
+      <li>Place into new method commented out code responsible for creating ascii representations of images as text files.</li>
     </ol>
   </li>
   <li>Improve image to ascii functionality.
@@ -71,14 +71,14 @@ In reverse chronological order.
   </li>
   <li>Optimization
     <ol type = "i">
-      <li>Identify and remove redundancy or unnecessary comparisons or actions left-over from previous project interations</li>
-      <li>Implement multithreading for populateColorArray() and convertToBlockGraphc(). Multithread where possible elswhere</li>
+      <li>Identify and remove redundancy or unnecessary comparisons or actions left-over from previous project interations.</li>
+      <li>Implement multithreading for populateColorArray() and convertToBlockGraphc(). Multithread where possible elswhere.</li>
       <li>Research and implement faster image creation and traversal techniques. Identify and address performance bottlenecks.</li>
     </ol>
   </li>
   <li>Create simple GUI
     <ol type = "i">
-      <li>If possible, design to be accessed from and used in browswer from website: www.positionovertime.com</li>
+      <li>If possible, design to be accessed from and used in browser from website: www.positionovertime.com</li>
       <li>Create simple executable.</li>
       <li>Honestly, I have no idea what this entails. I know nothing about java tools for creating interactive graphics.</li>
     </ol>
