@@ -17,17 +17,18 @@ public class ImageToText {
     private String extension;
     private FType filetype;
     private ColorTag colortype;
+    private DitherTag dithertype;
     private ImageFrame[] inbuff;
     private GifToolKit toolkit = new GifToolKit();
     private Palette colorkit = new Palette();
 
 
-    public ImageToText(String name, String extension, FType filetype, ColorTag colortype){
+    public ImageToText(String name, String extension, FType filetype, ColorTag colortype, DitherTag dithertype){
         this.name = name;
         this.extension = extension;
         this.filetype = filetype;
         this.colortype = colortype;
-
+        this.dithertype = dithertype;
     }
 
     public void populateColorArray(Color[][] carray, BufferedImage im, int cwidth, int cdepth, int blockSize, boolean dithering){
@@ -198,6 +199,7 @@ public class ImageToText {
         FileInputStream fis;
         BufferedImage img;
         BufferedImage imgpass;
+        BlockGraphicConverter converter = new BlockGraphicConverter();
         int count = 0;
         int frames = 1;
 
@@ -236,12 +238,16 @@ public class ImageToText {
 
                 //System.out.println("THIS IS THE VALUE OF BWIDTH: " + bwidth);
                 //System.out.println("THIS IS THE VALUE OF BHEIGHT: " + bheight);
-                if (ditheringcheck == true)
-                    img = ditherFS(img);
+                if (ditheringcheck) {
+                    if (dithertype == DitherTag.FS)
+                        img = ditherFS(img);
+                }
                 for (int i = 0; i < bheight; i++)
                     populateColorArray (colorarray, img, bwidth, i, blockSize, ditheringcheck);
+                if (dithertype == DitherTag.OR4)
+                    converter.orderedDither4x4(colorarray, colortype, bwidth, bheight);
 
-                BufferedImage image = new BlockGraphicConverter().convertToBlockGraphic(colorarray, bwidth, bheight, expandSize);
+                BufferedImage image = converter.convertToBlockGraphic(colorarray, bwidth, bheight, expandSize);
 
                 if (filetype == FType.GIF_TYPE)
                     writ.writeToSequence(image);

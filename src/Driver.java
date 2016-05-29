@@ -22,10 +22,11 @@ public class Driver {
     public static void main(String[] args){
 
         int simpleswitch = 1;
-        String fileName = "rain2";
-        String extension = ".gif";
+        String fileName = "david";
+        String extension = ".png";
         int reduceBy = 1;
-        ColorTag colortype = ColorTag.NES;
+        ColorTag colortype = ColorTag.MONO;
+        DitherTag dithertype = DitherTag.OR4;
         boolean dithering = true;
 
         FType filetype;
@@ -33,6 +34,8 @@ public class Driver {
             filetype = FType.GIF_TYPE;
         else
             filetype = FType.PNG_TYPE;
+
+        ImageToText itt = new ImageToText(fileName, extension, filetype, colortype, dithertype);
 
 
         if(simpleswitch == 0) {
@@ -42,14 +45,11 @@ public class Driver {
 
             int loop = 1;
 
-
             if (loop == 1) {
-                ImageToText itt = new ImageToText(fileName, extension, filetype, colortype);
                 itt.colorText(background, reduceBy, fontsize, transparency);
             }
             if (loop > 1) {
                 while (loop < 4) {
-                    ImageToText itt = new ImageToText(fileName + loop, extension, filetype, colortype);
                     itt.colorText(background, reduceBy, fontsize, transparency);
                     loop++;
                 }
@@ -58,7 +58,6 @@ public class Driver {
         else {
             int blockSize = 1;
             int expandSize = 2;
-            ImageToText itt = new ImageToText(fileName, extension, filetype, colortype);
             itt.blockImageCreate(reduceBy, blockSize, expandSize, dithering);
         }
     }
