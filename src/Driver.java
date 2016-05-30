@@ -24,6 +24,13 @@ import java.awt.*;
 public class Driver {
     public static void main(String[] args){
 
+        //EXAMPLE FORMAT FOR FILE PATH:
+        //"C:\\Images\\gifs\\recombined\\"
+        //Must include double \ as \ is an escape character in Java.
+
+
+        String fileorigin = null;
+        String filedestination = null;
         int simpleswitch = 1;
         String fileName = "deepforest1";
         String extension = ".jpg";
@@ -39,7 +46,12 @@ public class Driver {
         else
             filetype = FType.PNG_TYPE;
 
-        ImageToText itt = new ImageToText(fileName, extension, filetype, colortype, dithertype);
+        ImageToText itt;
+        if (fileorigin == null || filedestination == null)
+            itt = new ImageToText(fileName, extension, filetype, colortype, dithertype);
+        else
+            itt = new ImageToText(fileName, extension, filetype, colortype, dithertype, fileorigin, filedestination);
+
 
 
         if(simpleswitch == 0) {

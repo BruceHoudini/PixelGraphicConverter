@@ -13,8 +13,7 @@ import java.util.ArrayList;
  */
 public class ImageToText {
 
-    private String name;
-    private String extension;
+    private String name, extension, fileorigin, filedestination;
     private FType filetype;
     private ColorTag colortype;
     private DitherTag dithertype;
@@ -29,6 +28,26 @@ public class ImageToText {
         this.filetype = filetype;
         this.colortype = colortype;
         this.dithertype = dithertype;
+
+
+        if (filetype == FType.GIF_TYPE) {
+            filedestination = "C:\\Images\\gifs\\recombined\\";
+            fileorigin = "C:\\Images\\gifs\\original\\";
+        }
+        else {
+            filedestination = "C:\\Images\\png\\converted\\";
+            fileorigin = "C:\\Images\\original\\";
+        }
+    }
+
+    public ImageToText(String name, String extension, FType filetype, ColorTag colortype, DitherTag dithertype, String fileorigin, String filedestination){
+        this.name = name;
+        this.extension = extension;
+        this.filetype = filetype;
+        this.colortype = colortype;
+        this.dithertype = dithertype;
+        this.fileorigin = fileorigin;
+        this.filedestination = filedestination;
     }
 
     public void populateColorArray(Color[][] carray, BufferedImage im, int cwidth, int cdepth, int blockSize, boolean dithering){
@@ -205,8 +224,8 @@ public class ImageToText {
 
         try {
             if(filetype == FType.GIF_TYPE){
-                output = new FileImageOutputStream(new File("C:\\Images\\gifs\\recombined\\" + name + "-" + colortype + ".gif"));
-                fis = new FileInputStream(new File("C:\\Images\\gifs\\original\\" + name + ".gif"));
+                output = new FileImageOutputStream(new File(filedestination + name + "-" + colortype + ".gif"));
+                fis = new FileInputStream(new File(fileorigin + name + ".gif"));
                 inbuff = toolkit.readGif(fis);
                 writ = new GifSequenceWriter(output, BufferedImage.TYPE_INT_ARGB, inbuff[1].getDelay(), Boolean.TRUE);
                 frames = inbuff.length;
@@ -220,7 +239,7 @@ public class ImageToText {
                 if (filetype == FType.GIF_TYPE)
                     imgpass = inbuff[count].getImage();
                 else
-                    imgpass = ImageIO.read(new File("C:\\Images\\original\\" + name + extension));
+                    imgpass = ImageIO.read(new File(fileorigin + name + extension));
 
                 int width = imgpass.getWidth();
                 int height = imgpass.getHeight();
@@ -252,7 +271,7 @@ public class ImageToText {
                 if (filetype == FType.GIF_TYPE)
                     writ.writeToSequence(image);
                 else
-                    ImageIO.write(image, "png", new File("C:\\Images\\png\\converted\\" + name + "-" + colortype + ".png"));
+                    ImageIO.write(image, "png", new File(filedestination + name + "-" + colortype + ".png"));
 
                 count++;
             }
@@ -282,8 +301,8 @@ public class ImageToText {
 
         try {
             if(filetype == FType.GIF_TYPE){
-                output = new FileImageOutputStream(new File("C:\\Images\\gifs\\recombined\\" + name + ".gif"));
-                fis = new FileInputStream(new File("C:\\Images\\gifs\\original\\" + name + ".gif"));
+                output = new FileImageOutputStream(new File(filedestination + name + ".gif"));
+                fis = new FileInputStream(new File(fileorigin + name + ".gif"));
                 inbuff = toolkit.readGif(fis);
                 writ = new GifSequenceWriter(output, BufferedImage.TYPE_INT_ARGB, inbuff[1].getDelay(), Boolean.TRUE);
                 frames = inbuff.length;
@@ -299,7 +318,7 @@ public class ImageToText {
                 if (filetype == FType.GIF_TYPE)
                     imgpass = inbuff[count].getImage();
                 else
-                    imgpass = ImageIO.read(new File("C:\\Images\\original\\" + name + extension));
+                    imgpass = ImageIO.read(new File(fileorigin + name + extension));
 
                 StringWriter sw = new StringWriter();
                 BufferedWriter bw = new BufferedWriter(sw);
@@ -381,7 +400,7 @@ public class ImageToText {
                 if (filetype == FType.GIF_TYPE)
                     writ.writeToSequence(image);
                 else
-                    ImageIO.write(image, "png", new File("C:\\Images\\png\\converted\\" + name + ".png"));
+                    ImageIO.write(image, "png", new File(filedestination + name + ".png"));
 
                 count++;
                 br.close();
@@ -401,6 +420,11 @@ public class ImageToText {
 
     }
 
+    //This used to be my primary "Do thing" method but it has since become unused. It remains so that I can
+    //1) Not forget how I implemented image to text document.
+    //2) Not feel like I'm deleting something else I won't remember.
+
+    /*
     public void gifMake(Color background, int reduceBy) {
         GifSequenceWriter writ;
         BufferedImage img;
@@ -497,5 +521,6 @@ public class ImageToText {
             }
 
         }
+        */
 }
 
