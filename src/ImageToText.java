@@ -177,7 +177,7 @@ public class ImageToText {
                     if (rn < 0)
                         rn = 0;
                     else if (rn > 255)
-                        rn = 0;
+                        rn = 255;
                     if (gn < 0)
                         gn = 0;
                     else if (gn > 255)
@@ -365,7 +365,7 @@ public class ImageToText {
                             else
                                 bw.write("?");
                         if (background == Color.BLACK)
-                            colorvals.add(new Color(r, g, b, 255).brighter().brighter());
+                            colorvals.add(new Color(r, g, b, 255));
                         else
                             colorvals.add(new Color(r, g, b, 255));
                     }

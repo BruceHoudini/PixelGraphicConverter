@@ -8,25 +8,29 @@ import java.awt.*;
  */
 
     //Resultant imagesize = (OriginalWidth/reduceBy * font.maxAdvance) x (OriginalHeight/reduceby * font.maxAscent)
-    //Filesize = Width*Height * pixeldepth (This will be 32 in most cases)
-    //NOTE! Dithering doesn't work if blocksize > 1.
-    //SECOND NOTE! Floyd-Steinberg Dithering doesn't produce any noticeable differences anyways so it doesn't matter.
-    //THIRD NOTE! reduceBy and blocksize accomplish identical tasks at different points during image production.
-    //COLOR TAGS ARE STD | NES | SNES.
+    //Filesize = Width*Height * pixeldepth (pixeldepth = 32 in most cases)
+    //NOTE! FS Dithering doesn't work if blocksize > 1. Well, it works, but it is undone by blocksize...
+    //THIRD NOTE! reduceBy and blocksize accomplish identical tasks at different points during image production. reduce is first, blocksize is second.
+    //COLOR TAGS ARE STD | NES | SNES | MONO
+    //DITHER TAGS ARE FS | OR4
     //Also, you're going to have to change the file path in the ImageToText class for images to be found and stored correctly.
     //This program is the product of whimsy and as a result is a hacked together mess. Any organization is welcome.
 
+    //some fontsizes produce messed up images. No idea why. 10, 20, and 30 function correclty.
+    //Fontsize can also MASSIVELY INCREASE FILE SIZE AND PROCESSING TIME so it is recommended to start low and if
+    //you do increase the fontsize make sure to increase the "reduceBy" value to compensate... or don't. I'm not your mother.
 
 
 public class Driver {
     public static void main(String[] args){
 
         int simpleswitch = 1;
-        String fileName = "david";
-        String extension = ".png";
-        int reduceBy = 1;
-        ColorTag colortype = ColorTag.MONO;
-        DitherTag dithertype = DitherTag.OR4;
+        String fileName = "deepforest1";
+        String extension = ".jpg";
+        int reduceBy = 4;
+        ColorTag colortype = ColorTag.SNES;
+        DitherTag dithertype = DitherTag.FS;
+        //NOTE! If dithertype = DitherTag.OR4 then dithering always equals true
         boolean dithering = true;
 
         FType filetype;
@@ -57,7 +61,7 @@ public class Driver {
         }
         else {
             int blockSize = 1;
-            int expandSize = 2;
+            int expandSize = 4;
             itt.blockImageCreate(reduceBy, blockSize, expandSize, dithering);
         }
     }
