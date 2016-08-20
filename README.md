@@ -6,6 +6,8 @@ My objective is to create a simple program which can convert a given image or gi
 <h3>Updates</h3>
 In reverse chronological order.
 <ul>
+<li>Added driver-overview.pdf which is, unsuprisingly, an overview of the driver class. This class is the program's entry point and is the only way to specify images and modification options before program execution. A poor man's interface.</li>
+<li>Added Ordered dithering using 4x4 Bayer Matrix for color-palette reduction.</li>
 <li>Changed name from UselessGifTextGifConverter to PixelGraphicConverter as the old name is no longer accurate and also because I have been told that self-deprication is not an attractive trait in a man.
 <li>Added Floyd-Steinberg dithering for color-palette reduction.</li>
 <li>Added alternate color palettes and color replacement options (64 color NES model and 15bit SNES model).</li>
